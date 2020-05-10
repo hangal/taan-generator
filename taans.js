@@ -5,13 +5,19 @@ let OCTAVES = ['LOWER', 'MIDDLE', 'UPPER'];
 var HOLD = {octave: 'MIDDLE', note: 'HOLD'};
 var HOLD2 = [HOLD, HOLD];
 var DEFAULT_NOTE_LEN = 0.5;
-var displayStr = {'S': 'Sa', 'r': '<u>Re</u>', 'R': 'Re', 'g': '<u>Ga</u>', 'G': 'Ga', 'M': 'Ma', 'm': 'MaT', 'P': 'Pa',
-    'd': '<span style="font-size:85%"><u>Dha</u></span>', 'D': '<span style="font-size:85%">Dha</span>',
-    'n': '<u>Ni</u>', 'N': 'Ni', 'HOLD': '-'};
 
 var displayStr = {'S': 'ಸಾ', 'r': '<u>ರೆ</u>', 'R': 'ರೆ', 'g': '<u>ಗ</u>', 'G': 'ಗ', 'M': 'ಮ', 'm': 'MaT', 'P': 'ಪ',
     'd': '<span style="font-size:85%"><u>ಧ</u></span>', 'D': '<span style="font-size:85%">ಧ</span>',
     'n': '<u>ನಿ</u>', 'N': 'ನಿ', 'HOLD': '-'};
+
+
+var displayStr = {'S': 'सा', 'r': '<u>रे</u>', 'R': 'रे', 'g': '<u>ग</u>', 'G': 'ग', 'M': 'म', 'm': 'MaT', 'P': 'प',
+    'd': '<u>ध</u>', 'D': 'ध',
+    'n': '<u>नी</u>', 'N': 'नी', 'HOLD': '-'};
+
+var displayStr = {'S': 'Sa', 'r': '<u>Re</u>', 'R': 'Re', 'g': '<u>Ga</u>', 'G': 'Ga', 'M': 'Ma', 'm': 'MaT', 'P': 'Pa',
+    'd': '<span style="font-size:85%"><u>Dha</u></span>', 'D': '<span style="font-size:85%">Dha</span>',
+    'n': '<u>Ni</u>', 'N': 'Ni', 'HOLD': '-'};
 
 let raagNotes = {
     'Bhoop': ['S', 'R', 'G', 'P', 'D'],
