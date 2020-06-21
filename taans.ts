@@ -1,33 +1,10 @@
-
-let ZERO_LEN: number = 0;
-var DEFAULT_NOTE_LEN = 0.5;
-
-enum Note {S, r, R, g, G, M, m, P, d, D, n, N, HOLD_NOTE}
-enum Octave {LOWER, MIDDLE, UPPER} // important assumption for iterating over octave elements - the values have to be numbers
-
-let displayStrEnglish = ['Sa', '<u>Re</u>', 'Re', '<u>Ga</u>','Ga', 'Ma', 'MaT', 'Pa', '<span style="font-size:85%"><u>Dha</u></span>', '<span style="font-size:85%">Dha</span>', '<u>Ni</u>', 'Ni', '-'];
-let displayStrKannada = ['ಸಾ', '<u>ರೆ</u>', 'ರೆ', '<u>ಗ</u>', 'ಗ', 'ಮ', 'MaT', 'ಪ', '<u>ಧ</u>', 'ಧ', '<u>ನಿ</u>', 'ನಿ', '-'];
-let displayStrDev = ['सा', '<u>रे</u>', 'रे', '<u>ग</u>', 'ग', 'म', 'MaT', 'प', '<u>ध</u>', 'ध', '<u>नी</u>', 'नी', '-'];
-let displayStr = displayStrEnglish;
-
-class Sound { octave: Octave = 0; note: Note = 0; len: number = 0; }
-
-let HOLD: Sound = {octave: Octave.MIDDLE, note: Note.HOLD_NOTE, len: ZERO_LEN}; // octave and len are really don't care for hold
-let HOLD2 = [HOLD, HOLD];
-
-class Raag { aaroh: Sound[] = []; avaroh: Sound[] = []; }
-
-let raagNotes = {
-    'Bhoop': [Note.S, Note.R, Note.G, Note.P, Note.D],
-    'Durga': [Note.S, Note.R, Note.M, Note.P, Note.D],
-    'Bairagi': [Note.S, Note.r, Note.M, Note.P, Note.n],
-    'Malkauns': [Note.S, Note.g, Note.M, Note.d, Note.n],
-    'Chandrakauns': [Note.S, Note.g, Note.M, Note.d, Note.N],
-    'Vibhas': [Note.S, Note.r, Note.g, Note.P, Note.d], // komal dha variant
-    'BhoopalTodi': [Note.S, Note.r, Note.g, Note.P, Note.d],
-};
+import {Note, Octave, Sound, Raag, HOLD, HOLD2, ZERO_LEN, DEFAULT_NOTE_LEN, displayStr} from "./music.js";
+import {parse} from "./parser.js";
+import {display} from "./renderer.js";
+import {ragas} from "./ragas.js";
 
 let patti: Array<Sound>; // but these sounds have no duration
+let currentNoteLen = 1.0;
 
 function generateFullPatti(sequence: Note[]) {
     patti = [];
@@ -42,6 +19,7 @@ function generateFullPatti(sequence: Note[]) {
     }
 }
 
+/** returns the index of s's note and octave if in patti, otherwise returns -1. */
 function idxOfNoteInPatti(s: Sound) {
     for (var i = 0; i < patti.length; i++)
         if (patti[i].note == s.note && patti[i].octave == s.octave)
@@ -59,14 +37,15 @@ function generate(startNote: Sound, pattern: any[], skip = 0, count = 1) {
     for (let i = 0; i < count; i++) {
         result.push (patti[idx]);
         var x = idx;
-        for (let j = 0; j < pattern.length; j++) {
-            if (pattern[j] === '-') {
+        for (let elem of pattern) {
+            if (elem === '-') {
                 result.push(HOLD);
             } else {
-                x += pattern[j] as number;
+                x += elem as number;
                 result.push(patti[x]);
             }
         }
+
         idx += skip;
     }
     return result;
@@ -79,89 +58,8 @@ function tihai (sequence: Sound[]): Sound[] {
     return result;
 }
 
-function display (sequence: Sound[], start_beat: number, cycle: number) {
-    var html = '<div class="taan">';
-    var this_beat = start_beat;
-
-    function close_beat() {
-        html += '</div> <!-- beat -->';
-    }
-
-    var cumulative_len = 0.0;
-    for (var i = 0; i < sequence.length; i++) {
-        let note = sequence[i];
-        if (!note.len)
-            note.len = DEFAULT_NOTE_LEN;
-
-        if (i === 0 || cumulative_len >= 1.0) {
-            cumulative_len = 0.0;
-            if (i !== 0) {
-                close_beat();
-                if (this_beat === start_beat) {
-                    html += '<br/><br/>';
-                }
-            }
-
-            //             <span class="emoji" style="font-size:200%">&#x1F44F</span>
-            let sam_class = (this_beat === 1) ? 'sam' : '';
-            html += '<div data-beat="' + this_beat + '" class="beat"><div class="beat-number ' + sam_class + '">' + this_beat + '</div>';
-            this_beat++;
-            if (this_beat > cycle)
-                this_beat = 1;
-        }
-
-        cumulative_len += note.len;
-
-        if (note.octave === Octave.LOWER)
-            html += '<div class="note lower-octave">';
-        else if (note.octave === Octave.UPPER)
-            html += '<div class="note upper-octave">';
-        else
-            html += '<div class="note">';
-        html += displayStr[note.note];
-        html += '</div>';
-    }
-
-    html += "</div><br/><br/>";
-    $('.taans').append (html);
-}
-
-function parse (s: string): Sound[] {
-    let result: Sound[] = [];
-    var current_note_len = DEFAULT_NOTE_LEN;
-    for (let i = 0; i < s.length; i++) {
-        var ch = s.charAt(i), skip_ch = false;
-        var octave = Octave.MIDDLE;
-        var note: number;
-
-        if (ch === '-' || ch === '+') {
-            octave = (ch === '-') ? Octave.LOWER : Octave.UPPER;
-            i++;
-            note = Note[s.charAt(i) as keyof typeof Note]; // returns undefined if the charAt(i) is not a valid note
-        }
-        else if (ch === '{') {
-            var notes_in_beat = s.substring(i).replace(/[-]/g,'').replace(/[+]/g,'').indexOf('}') - 1; // replace the + and -
-            if (notes_in_beat >= 1)
-                current_note_len = 1/notes_in_beat;
-            console.log (current_note_len);
-            skip_ch = true;
-        } else if (ch === '}') {
-            current_note_len = DEFAULT_NOTE_LEN;
-            skip_ch = true;
-        } else if (ch === '_') {
-            note = Note.HOLD_NOTE;
-        } else {
-            note =  Note[s.charAt(i) as keyof typeof Note];
-        }
-
-        if (!skip_ch)
-            result.push({note: note, octave: octave, len: current_note_len});
-    }
-    return result;
-}
-
-function main() {
-    generateFullPatti(raagNotes['Bairagi']);
+export function main() {
+    generateFullPatti(ragas['Bairagi']);
     let middle_sa_idx = idxOfNoteInPatti({octave: Octave.MIDDLE, note: Note.S, len: ZERO_LEN});
     let upper_sa_idx = idxOfNoteInPatti({octave: Octave.UPPER, note: Note.S, len: ZERO_LEN});
 
@@ -239,7 +137,7 @@ function main() {
     }
 
     // bhoop - teentaal
-    DEFAULT_NOTE_LEN = 1.0;
+    currentNoteLen = 1.0;
     display(parse('D+SDPGRSRG_GRGPD_'), 9, 16);
     display(parse('GGGRGPD_+S_DPGRS_'), 9, 16);
     display(parse('G_G_P_D_+S_+S_+S+R+S_'), 9, 16);
@@ -254,3 +152,6 @@ function main() {
     display(parse('DDD+S+R+R{+S+R}+G+R{+S+R}{+SD}P'), 1, 12);
     display(parse('D{D+S}DPG{GP}GRS{SR}{S-D}{SR}'), 1, 12);
 }
+
+main();
+

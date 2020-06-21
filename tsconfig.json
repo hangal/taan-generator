@@ -3,8 +3,8 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "commonjs",
     "target": "es6",
-    "jsx": "react"
+    "module": "es6" // see http://json.schemastore.org/tsconfig
+//    "jsx": "react"
   }
 }
