@@ -1,47 +1,50 @@
-"use strict"
 
-let BASE_NOTES = ['S', 'r', 'R', 'g', 'G', 'M', 'm', 'P', 'd', 'D', 'n', 'N', 'HOLD'];
-let OCTAVES = ['LOWER', 'MIDDLE', 'UPPER'];
-var HOLD = {octave: 'MIDDLE', note: 'HOLD'};
-var HOLD2 = [HOLD, HOLD];
+let ZERO_LEN: number = 0;
 var DEFAULT_NOTE_LEN = 0.5;
 
-var displayStr = {'S': 'ಸಾ', 'r': '<u>ರೆ</u>', 'R': 'ರೆ', 'g': '<u>ಗ</u>', 'G': 'ಗ', 'M': 'ಮ', 'm': 'MaT', 'P': 'ಪ',
-    'd': '<span style="font-size:85%"><u>ಧ</u></span>', 'D': '<span style="font-size:85%">ಧ</span>',
-    'n': '<u>ನಿ</u>', 'N': 'ನಿ', 'HOLD': '-'};
+enum Note {S, r, R, g, G, M, m, P, d, D, n, N, HOLD_NOTE}
+enum Octave {LOWER, MIDDLE, UPPER} // important assumption for iterating over octave elements - the values have to be numbers
 
+let displayStrEnglish = ['Sa', '<u>Re</u>', 'Re', '<u>Ga</u>','Ga', 'Ma', 'MaT', 'Pa', '<span style="font-size:85%"><u>Dha</u></span>', '<span style="font-size:85%">Dha</span>', '<u>Ni</u>', 'Ni', '-'];
+let displayStrKannada = ['ಸಾ', '<u>ರೆ</u>', 'ರೆ', '<u>ಗ</u>', 'ಗ', 'ಮ', 'MaT', 'ಪ', '<u>ಧ</u>', 'ಧ', '<u>ನಿ</u>', 'ನಿ', '-'];
+let displayStrDev = ['सा', '<u>रे</u>', 'रे', '<u>ग</u>', 'ग', 'म', 'MaT', 'प', '<u>ध</u>', 'ध', '<u>नी</u>', 'नी', '-'];
+let displayStr = displayStrEnglish;
 
-var displayStr = {'S': 'सा', 'r': '<u>रे</u>', 'R': 'रे', 'g': '<u>ग</u>', 'G': 'ग', 'M': 'म', 'm': 'MaT', 'P': 'प',
-    'd': '<u>ध</u>', 'D': 'ध',
-    'n': '<u>नी</u>', 'N': 'नी', 'HOLD': '-'};
+class Sound { octave: Octave = 0; note: Note = 0; len: number = 0; }
 
-var displayStr = {'S': 'Sa', 'r': '<u>Re</u>', 'R': 'Re', 'g': '<u>Ga</u>', 'G': 'Ga', 'M': 'Ma', 'm': 'MaT', 'P': 'Pa',
-    'd': '<span style="font-size:85%"><u>Dha</u></span>', 'D': '<span style="font-size:85%">Dha</span>',
-    'n': '<u>Ni</u>', 'N': 'Ni', 'HOLD': '-'};
+let HOLD: Sound = {octave: Octave.MIDDLE, note: Note.HOLD_NOTE, len: ZERO_LEN}; // octave and len are really don't care for hold
+let HOLD2 = [HOLD, HOLD];
+
+class Raag { aaroh: Sound[] = []; avaroh: Sound[] = []; }
 
 let raagNotes = {
-    'Bhoop': ['S', 'R', 'G', 'P', 'D'],
-    'Durga': ['S', 'R', 'M', 'P', 'D'],
-    'Bairagi': ['S', 'r', 'M', 'P', 'n'],
-    'Malkauns': ['S', 'g', 'M', 'd', 'n'],
-    'Chandrakauns': ['S', 'g', 'M', 'd', 'N'],
-    'Vibhas': ['S', 'r', 'G', 'P', 'd'],
-    'BhoopalTodi': ['S', 'r', 'g', 'P', 'd'],
+    'Bhoop': [Note.S, Note.R, Note.G, Note.P, Note.D],
+    'Durga': [Note.S, Note.R, Note.M, Note.P, Note.D],
+    'Bairagi': [Note.S, Note.r, Note.M, Note.P, Note.n],
+    'Malkauns': [Note.S, Note.g, Note.M, Note.d, Note.n],
+    'Chandrakauns': [Note.S, Note.g, Note.M, Note.d, Note.N],
+    'Vibhas': [Note.S, Note.r, Note.g, Note.P, Note.d], // komal dha variant
+    'BhoopalTodi': [Note.S, Note.r, Note.g, Note.P, Note.d],
 };
 
-let patti;
+let patti: Array<Sound>; // but these sounds have no duration
 
-function generateFullPatti(raag) {
+function generateFullPatti(sequence: Note[]) {
     patti = [];
-    for (let i = 0; i < OCTAVES.length; i++)
-        for (let j = 0; j < raagNotes[raag].length; j++)
-            patti.push ({octave: OCTAVES[i], note: raagNotes[raag][j]});
+
+    for (let o in Octave) {
+        if (parseInt(Octave[o]) >= 0) { // enum has both strings and reverse-mapping of numbers to the string, we want only the strings
+            for (let j = 0; j < sequence.length; j++) {
+                let s: Sound = {octave: parseInt(Octave[o]), note: sequence[j], len: ZERO_LEN};
+                patti.push(s);
+            }
+        }
+    }
 }
 
-function idxOfNoteInPatti(note) {
-    let noteJson = JSON.stringify(note);
+function idxOfNoteInPatti(s: Sound) {
     for (var i = 0; i < patti.length; i++)
-        if (JSON.stringify(patti[i]) === noteJson)
+        if (patti[i].note == s.note && patti[i].octave == s.octave)
             return i;
     return -1;
 }
@@ -50,13 +53,7 @@ function idxOfNoteInPatti(note) {
 // optionally, if given a skip and a count, generates the pattern count number of times, each time shifting the starting note by the given skip
 // pattern for srgmpdns is [1, 1, 1, 1, 1, 1, 1], i.e. each step is relative to the previous note (not the starting note)
 // skip, count are optional
-// ski;
-function generate(startNote, pattern, skip, count) {
-    if (typeof (skip) === "undefined")
-        skip = 0;
-    if (typeof (count) === "undefined")
-        count = 1;
-
+function generate(startNote: Sound, pattern: any[], skip = 0, count = 1) {
     let result = [];
     let idx = idxOfNoteInPatti (startNote);
     for (let i = 0; i < count; i++) {
@@ -66,7 +63,7 @@ function generate(startNote, pattern, skip, count) {
             if (pattern[j] === '-') {
                 result.push(HOLD);
             } else {
-                x += pattern[j];
+                x += pattern[j] as number;
                 result.push(patti[x]);
             }
         }
@@ -75,14 +72,14 @@ function generate(startNote, pattern, skip, count) {
     return result;
 }
 
-function tihai (sequence) {
+function tihai (sequence: Sound[]): Sound[] {
     var result = [...sequence]; // spread operator in ES6
     result.push.apply(result, sequence);
     result.push.apply(result, sequence);
     return result;
 }
 
-function display (sequence, start_beat, cycle) {
+function display (sequence: Sound[], start_beat: number, cycle: number) {
     var html = '<div class="taan">';
     var this_beat = start_beat;
 
@@ -115,9 +112,9 @@ function display (sequence, start_beat, cycle) {
 
         cumulative_len += note.len;
 
-        if (note.octave === 'LOWER')
+        if (note.octave === Octave.LOWER)
             html += '<div class="note lower-octave">';
-        else if (note.octave === 'UPPER')
+        else if (note.octave === Octave.UPPER)
             html += '<div class="note upper-octave">';
         else
             html += '<div class="note">';
@@ -129,56 +126,20 @@ function display (sequence, start_beat, cycle) {
     $('.taans').append (html);
 }
 
-function fitTextInContainer($container, $textElement, fontSize) {
-    var MIN_FONT_SIZE = 10; // Beyond this font size the text is unreadable
-
-    if ($container.length !== 1 || $textElement.length !== 1) { // Only one element is expected. If more than one element is present return
-        WARN_ON_SERVER ('op: fitTextInContainer $container.length: ' + $container.length + ' $textElement.length: ' + $textElement.length);
-        return;
-    }
-
-    var textElement = $textElement[0];
-    var container = $container[0];
-    var newFontSize = fontSize;
-    $(textElement).css("font-size", fontSize + "px"); // start with the given font size and then scale down if required
-    var currentTextHeight = textElement.scrollHeight;
-
-    // It's important to compare the rounded values of the heights here so that the numbers have the same baseline. For example, we had a case where
-    // on some Firefox 72 windows 10 instances, the $container.height() was returning a decimal value (48.8) and the textElement.scrollHeight was returning a rounded value (49) making them unequal,
-    // which led to an infinite loop (we didn't have any exit conditions inside the while loop then). We should avoid mixing up jquery and javascript API when comparing two values.
-    // We are using clientHeight and scrollHeight both of which return rounded values.
-    while (Math.round(textElement.scrollHeight) > Math.round(container.clientHeight)) { // Note ScrollHeight > clientHeight only when the content overflows, otherwise it's equal to the clientHeight
-        newFontSize--;  // reduce the font size till the clue text fits in the container
-        if (newFontSize < MIN_FONT_SIZE) { // don't go below min font size
-            return;
-        }
-        currentTextHeight = textElement.scrollHeight; // Save the current height
-        $(textElement).css("font-size", newFontSize + "px");
-        DEBUG_ON_SERVER ("'op: fitTextInContainer font-size:" + fontSize + ", New font-size:" + newFontSize + ", text scroll height:" + textElement.scrollHeight + ", text height:" + textElement.clientHeight + ", container height:" + container.clientHeight);
-        if (currentTextHeight === textElement.scrollHeight) { // If there is no change in the textElement's scroll height even after changing the font, get out of here.
-            // WARN_ON_SERVER ("op: fitTextInContainer the scrollHeight didn't change after font size reduced to: " + newFontSize + ", text scroll height: " + textElement.scrollHeight);
-            return;
-        }
-    }
-}
-
-function parse (s) {
-    var result = [];
+function parse (s: string): Sound[] {
+    let result: Sound[] = [];
     var current_note_len = DEFAULT_NOTE_LEN;
-    for (var i = 0; i < s.length; i++) {
+    for (let i = 0; i < s.length; i++) {
         var ch = s.charAt(i), skip_ch = false;
-        var octave = 'MIDDLE';
-        var note;
+        var octave = Octave.MIDDLE;
+        var note: number;
 
-        if (ch === '-') {
-            octave = 'LOWER';
+        if (ch === '-' || ch === '+') {
+            octave = (ch === '-') ? Octave.LOWER : Octave.UPPER;
             i++;
-            note = s.charAt(i);
-        } else if (ch === '+') {
-            octave = 'UPPER';
-            i++;
-            note = s.charAt(i);
-        } else if (ch === '{') {
+            note = Note[s.charAt(i) as keyof typeof Note]; // returns undefined if the charAt(i) is not a valid note
+        }
+        else if (ch === '{') {
             var notes_in_beat = s.substring(i).replace(/[-]/g,'').replace(/[+]/g,'').indexOf('}') - 1; // replace the + and -
             if (notes_in_beat >= 1)
                 current_note_len = 1/notes_in_beat;
@@ -188,13 +149,10 @@ function parse (s) {
             current_note_len = DEFAULT_NOTE_LEN;
             skip_ch = true;
         } else if (ch === '_') {
-            note = 'HOLD';
+            note = Note.HOLD_NOTE;
         } else {
-            note = s.charAt(i);
+            note =  Note[s.charAt(i) as keyof typeof Note];
         }
-
-        if (!BASE_NOTES.includes(note))
-            alert ('BASE_NOTES doesn\'t include ' + note);
 
         if (!skip_ch)
             result.push({note: note, octave: octave, len: current_note_len});
@@ -202,10 +160,10 @@ function parse (s) {
     return result;
 }
 
-$(function() {
-    generateFullPatti('Bairagi');
-    let middle_sa_idx = idxOfNoteInPatti({octave: 'MIDDLE', note: 'S'});
-    let upper_sa_idx = idxOfNoteInPatti({octave: 'MIDDLE', note: 'S'});
+function main() {
+    generateFullPatti(raagNotes['Bairagi']);
+    let middle_sa_idx = idxOfNoteInPatti({octave: Octave.MIDDLE, note: Note.S, len: ZERO_LEN});
+    let upper_sa_idx = idxOfNoteInPatti({octave: Octave.UPPER, note: Note.S, len: ZERO_LEN});
 
     // bairagi taans
     var snpmrs = generate(patti[upper_sa_idx], [], -1, 6);
@@ -295,5 +253,4 @@ $(function() {
     display(parse('GGGPDPD+SD+S_+S'), 1, 12);
     display(parse('DDD+S+R+R{+S+R}+G+R{+S+R}{+SD}P'), 1, 12);
     display(parse('D{D+S}DPG{GP}GRS{SR}{S-D}{SR}'), 1, 12);
-});
-
+}
