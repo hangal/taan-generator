@@ -2,9 +2,9 @@
 import {Sound, Note, DEFAULT_NOTE_LEN, Octave} from "./music.js";
 
 /* parse a text string into a sound sequence (like Lilypond or ABC) */
-export function parse (s: string): Sound[] {
+export function parse (s: string, note_len = DEFAULT_NOTE_LEN): Sound[] {
     let result: Sound[] = [];
-    var current_note_len = DEFAULT_NOTE_LEN;
+    var current_note_len = note_len;
 
     for (let i = 0; i < s.length; i++) {
         var ch = s.charAt(i), skip_ch = false;
@@ -23,7 +23,7 @@ export function parse (s: string): Sound[] {
             console.log (current_note_len);
             skip_ch = true;
         } else if (ch === '}') {
-            current_note_len = DEFAULT_NOTE_LEN;
+            current_note_len = note_len; // restore the default
             skip_ch = true;
         } else if (ch === '_') {
             note = Note.HOLD_NOTE;

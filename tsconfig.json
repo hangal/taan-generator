@@ -5,6 +5,5 @@
     "noImplicitAny": true,
     "target": "es6",
     "module": "es6" // see http://json.schemastore.org/tsconfig
-//    "jsx": "react"
   }
 }
