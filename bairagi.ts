@@ -6,7 +6,7 @@ import {ragas} from "./ragas.js";
 export function main() {
     let currentNoteLen = 1.0;
 
-    let patti = generateFullPatti(ragas['Bairagi']);
+    let patti = generateFullPatti(ragas['Bhoop']);
     displayHeader ("Bairagi Bhairav");
 
     display(parse('{rS}{-nS}{rP}M__PMrrMSr-NS_', 1), 14, 16);
