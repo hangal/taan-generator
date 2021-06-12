@@ -2,10 +2,53 @@
 enum Note {S, r, R, g, G, M, m, P, d, D, n, N, HOLD_NOTE}
 enum Octave {LOWER, MIDDLE, UPPER} // important assumption for iterating over octave elements - the values have to be numbers
 
-const displayStrEnglish = ['Sa', '<u>Re</u>', 'Re', '<u>Ga</u>','Ga', 'Ma', 'MaT', 'Pa', '<span style="font-size:85%"><u>Dha</u></span>', '<span style="font-size:85%">Dha</span>', '<u>Ni</u>', 'Ni', '-'];
-const displayStrKannada = ['ಸಾ', '<u>ರೆ</u>', 'ರೆ', '<u>ಗ</u>', 'ಗ', 'ಮ', 'MaT', 'ಪ', '<u>ಧ</u>', 'ಧ', '<u>ನಿ</u>', 'ನಿ', '-'];
-const displayStrDev = ['सा', '<u>रे</u>', 'रे', '<u>ग</u>', 'ग', 'म', 'MaT', 'प', '<u>ध</u>', 'ध', '<u>नी</u>', 'नी', '-'];
-const displayStr = displayStrEnglish;
+const languageToBasicNotes = new Map([
+    ["sen", ['S', 'R', 'G', 'M', 'P', 'D', 'N']],
+    ["en", ['Sa', 'Re', 'Ga', 'Ma', 'Pa', '<span style="font-size:85%">Dha</span>', 'Ni']],
+    ["kn", ['ಸಾ', 'ರೆ', 'ಗ', 'ಮ', 'ಪ', 'ಧ', 'ನಿ']],
+    ["hi", ['सा', 'रे', 'ग', 'म', 'प', 'ध', 'नी']]
+]);
+
+// make the hindi and kannada chars bigger because the fonts are small
+// languageToBasicNotes.forEach(function(v, k) {
+//     if (k == 'hi' || k == 'kn') {
+//         let result = [] as any;
+//         v.forEach(function(elem) {
+//             result.push ('<span style="font-size:20px">' + elem + '</span>');
+//         });
+//         languageToBasicNotes.set (k, result);
+//     }
+// });
+
+const languageToNotes: Map<string, Array<string>> = new Map();
+languageToBasicNotes.forEach(function(v, k) {
+    const notesForLang = [];
+    notesForLang.push (v[0]);
+
+    notesForLang.push ('<span class="komal">' + v[1] + '</span>');
+    notesForLang.push (v[1]);
+    notesForLang.push ('<span class="komal">' + v[2] + '</span>');
+    notesForLang.push (v[2]);
+
+    notesForLang.push (v[3]);
+    notesForLang.push ('<span class="teevra">' + v[3] + '</span>');
+
+    notesForLang.push (v[4]);
+
+    notesForLang.push ('<span class="komal">' + v[5] + '</span>');
+    notesForLang.push (v[5]);
+    notesForLang.push ('<span class="komal">' + v[6] + '</span>');
+    notesForLang.push (v[6]);
+
+    notesForLang.push ('—');
+
+    languageToNotes.set(k, notesForLang);
+});
+
+var displayStr = languageToNotes.get("en"); // default english
+export function setLanguage(languageCode: string) {
+    displayStr = languageToNotes.get(languageCode);
+}
 
 class Sound { octave: Octave = 0; note: Note = 0; len: number = 0; }
 
@@ -16,8 +59,9 @@ const HOLD: Sound = {octave: Octave.MIDDLE, note: Note.HOLD_NOTE, len: ZERO_LEN}
 const HOLD2 = [HOLD, HOLD];
 
 class Raag { aaroh: Sound[] = []; avaroh: Sound[] = []; }
+export interface Song { renderSong(): void; }
 
-export {Note, Octave, Sound, Raag, displayStr, ZERO_LEN, DEFAULT_NOTE_LEN, HOLD, HOLD2};
+export {Note, Octave, Sound, Raag, displayStr, ZERO_LEN, DEFAULT_NOTE_LEN, HOLD, HOLD2, languageToNotes};
 
 export function tihai(sequence: Sound[]): Sound[] {
     var result = [...sequence]; // spread operator in ES6

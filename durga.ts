@@ -3,7 +3,7 @@ import {parse} from "./parser.js";
 import {display, displayHeader} from "./renderer.js";
 import {ragas} from "./ragas.js";
 
-export function main() {
+export function render() {
     let currentNoteLen = 1.0;
 
     let patti = generateFullPatti(ragas['Durga']);
@@ -24,6 +24,4 @@ export function main() {
     display(parse('MMPD+SD+S_D+S+R+S{D+S}{DP}M_', 1), 9, 16);
     display(parse('+M+R+SD+R+S+DP+S{DP}D{PM}P{MP}M{RS}', 1), 9, 16);
 }
-
-main();
 

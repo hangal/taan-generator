@@ -3,7 +3,7 @@ import {parse} from "./parser.js";
 import {display, displayHeader} from "./renderer.js";
 import {ragas} from "./ragas.js";
 
-export function main() {
+export function render() {
     let currentNoteLen = 1.0;
 
     let patti = generateFullPatti(ragas['Bhoop']);
@@ -27,6 +27,4 @@ export function main() {
     display(parse('DDD+S+R+R{+S+R}+G+R{+S+R}{+SD}P', 1), 1, 12);
     display(parse('D{D+S}DPG{GP}GRS{SR}{S-D}{SR}', 1), 1, 12);
 }
-
-main();
 

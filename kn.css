@@ -1,0 +1,2 @@
+.kn .note { font-size: 20px; }
+.kn .lower-octave::after { content: 'o'; position: absolute; top: 22px; left: 8px; font-size: 10px;}

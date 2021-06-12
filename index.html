@@ -5,23 +5,59 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />    <title>Taan generator</title>
 <!--    <script data-main="dist/taans" src="scripts/require.js"></script>-->
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-    <script type="module" src="dist/gujritodi.js"></script>
+    <script type="module" src="dist/main.js"></script>
     <style>
          body { font-family: "Open Sans", sans-serif; margin:auto;}
         .taans { color: white; }
         .taan { border-bottom: solid 1px lightyellow; padding-top: 10px; display: inline-block;}
-        .note { display: inline-block; padding: 5px; position:relative; }
-        .lower-octave::after { content: 'o'; position: absolute; top: 20px; left: 8px; font-size: 12px;}
-        .upper-octave::after {  content: 'o'; position: absolute; top: -5px; left: 8px; font-size: 12px;}
+        .note { display: inline-block; padding: 5px; position:relative; top:5px; text-underline-offset: 8px;}  .note { display: inline-block; padding: 5px; position:relative; top:5px; text-underline-offset: 8px;}
+         .teevra::after { content: '|'; position: absolute; top: -6px; left: 15px; font-size: 9px;}
+         .komal { text-decoration: underline; }
+         .lower-octave::after { content: 'o'; position: absolute; top: 18px; left: 8px; font-size: 10px;}
+        .upper-octave::after {  content: 'o'; position: absolute; top: -6px; left: 8px; font-size: 12px; }
         .beat { display: inline-block; border-right: solid 2px #444; height: 60px; width: 70px; padding-top: 5px; text-align: center;}
         .beat-number { padding-left: 5px; font-size: 12px; color: lightskyblue;}
         .emoji { color: transparent; text-shadow: 0 0 0 lightskyblue; }
+        select { background: black; color: white; padding: 10px; border-top: none; border-left: none; border-right: none; }
+        .header {
+            color: hotpink;
+            padding: 10px;
+        }
+        body {
+            background-color: #131313;
+            background-size: 20px 20px;
+        }
+
     </style>
+    <link rel="stylesheet" type="text/css" href="hi.css">
+    <link rel="stylesheet" type="text/css" href="kn.css" disabled>
+    <link rel="stylesheet" type="text/css" href="sen.css" disabled>
+    <link rel="stylesheet" type="text/css" href="en.css" disabled>
+
 </head>
 
-<body style="background-color: black">
+<body>
+    <select id="lang">
+        <option value="sen" selected>English</option>
+        <option value="kn">Kannada</option>
+        <option value="hi">Hindi/Marathi</option>
+<!--        <option value="en">English</option>-->
+    </select>
+
+    <select id="raag">
+        <option value="GujriTodi">Gujri Todi</option>
+        <option value="Bairagi">Bairagi Bhairav</option>
+        <option value="Bhairav">Bhairav</option>
+        <option value="Bhoop">Bhoop</option>
+        <option value="Durga">Durga</option>
+        <option value="Bageshree">Bageshree</option>
+        <option value="Multani">Multani</option>
+        <option value="Malhar">Malhar</option>
+    </select>
+
     <div class="taans">
 
     </div>
+
 </body>
 </html>

@@ -3,7 +3,7 @@ import {parse} from "./parser.js";
 import {display, displayHeader} from "./renderer.js";
 import {ragas} from "./ragas.js";
 
-export function main() {
+export function render() {
 //    let currentNoteLen = 1.0;
 
 //    let patti = generateFullPatti(ragas['Bhoop']);
@@ -12,7 +12,7 @@ export function main() {
     let line2 = parse('GGMrGMPPMGMGr_S_', 1);
     let line3 = parse('SrGMP_Pd{Pd}{N+S}{dN}{+SN}dPMG', 1);
 
-    display(parse('GMd_P_dMP_{MP}{dP}M_GR', 1), 9, 16);
+    display(parse('GMd_P_dMP_{MP}{dP}M_Gr', 1), 9, 16);
     display(line2, 9, 16);
     display(line3, 9, 16);
     display(parse('M_MMPPddPd+S_+SN+r+S', 1), 9, 16);
@@ -20,6 +20,4 @@ export function main() {
     display(line2, 9, 16);
     display(line3, 9, 16);
 }
-
-main();
 

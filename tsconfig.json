@@ -3,7 +3,14 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,
-    "target": "es6",
-    "module": "es6" // see http://json.schemastore.org/tsconfig
+    "target": "es5",
+    "module": "es6",
+    // see http://json.schemastore.org/tsconfig
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+      "es2015.collection"
+    ]
   }
 }

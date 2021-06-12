@@ -1,0 +1,6 @@
+.hi .note { font-size: 20px; }
+.hi .lower-octave::after { content: 'o'; position: absolute; top: 22px; left: 8px; font-size: 10px;}
+.hi .teevra::after {
+    top: -4px;
+    left: 10px;
+}

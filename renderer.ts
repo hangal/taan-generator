@@ -3,7 +3,7 @@ import {displayStr, Octave, Sound} from "./music.js";
 let currentNoteLen  = 1;
 
 export function displayHeader (s: string) {
-    $('.taans').append ('<br/><hr/><br/>' + s + '<br/>');
+    $('.taans').append ('<div class="header">' + s + '</div>');
 }
 
 export function display (sequence: Sound[], start_beat: number, cycle: number) {
