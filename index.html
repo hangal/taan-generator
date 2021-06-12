@@ -8,7 +8,7 @@
     <script type="module" src="dist/main.js"></script>
     <style>
          body { font-family: "Open Sans", sans-serif; margin:auto;}
-        .taans { color: white; }
+        .composition { color: inherit; }
         .taan { border-bottom: solid 1px lightyellow; padding-top: 10px; display: inline-block;}
         .note { display: inline-block; padding: 5px; position:relative; top:5px; text-underline-offset: 8px;}  .note { display: inline-block; padding: 5px; position:relative; top:5px; text-underline-offset: 8px;}
          .teevra::after { content: '|'; position: absolute; top: -6px; left: 15px; font-size: 9px;}
@@ -19,6 +19,7 @@
         .beat-number { padding-left: 5px; font-size: 12px; color: lightskyblue;}
         .emoji { color: transparent; text-shadow: 0 0 0 lightskyblue; }
         select { background: black; color: white; padding: 10px; border-top: none; border-left: none; border-right: none; }
+        button.composer-button { margin-left: 10px; background:inherit; color:white; padding: 10px; border: solid 1px #999; }
         .header {
             color: hotpink;
             padding: 10px;
@@ -26,6 +27,8 @@
         body {
             background-color: #131313;
             background-size: 20px 20px;
+            padding: 10px;
+            color: #ccc;
         }
 
     </style>
@@ -45,17 +48,30 @@
     </select>
 
     <select id="raag">
-        <option value="GujriTodi">Gujri Todi</option>
-        <option value="Bairagi">Bairagi Bhairav</option>
         <option value="Bhairav">Bhairav</option>
+        <option value="Bairagi">Bairagi Bhairav</option>
+        <option value="AhirBhairav">Ahir Bhairav</option>
+        <option value="GujriTodi">Gujri Todi</option>
+
+        <option value="BrindavaniSarang">Brindavani Sarang</option>
+        <option value="Multani">Multani</option>
+
         <option value="Bhoop">Bhoop</option>
         <option value="Durga">Durga</option>
         <option value="Bageshree">Bageshree</option>
-        <option value="Multani">Multani</option>
-        <option value="Malhar">Malhar</option>
+        <option value="MianMalhar">Mian Malhar</option>
     </select>
 
-    <div class="taans">
+    <button class="composer-button">Composer</button>
+    <br/><br/>
+    <div class="composer" style="display:none">
+        <div class="composer-help">
+        Type in your composition in the area below.<br/>
+        <textarea style="width:500px;height:200px;" class="composer-text"></textarea>
+        </div>
+    </div>
+
+    <div class="composition">
 
     </div>
 

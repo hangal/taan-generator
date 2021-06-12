@@ -3,7 +3,7 @@ import {displayStr, Octave, Sound} from "./music.js";
 let currentNoteLen  = 1;
 
 export function displayHeader (s: string) {
-    $('.taans').append ('<div class="header">' + s + '</div>');
+    $('.composition').append ('<div class="header">' + s + '</div>');
 }
 
 export function display (sequence: Sound[], start_beat: number, cycle: number) {
@@ -45,12 +45,12 @@ export function display (sequence: Sound[], start_beat: number, cycle: number) {
             html += '<div class="note upper-octave">';
         else
             html += '<div class="note">';
-        html += displayStr[note.note];
+        html += displayStr[note.note] ? displayStr[note.note] : "?";
         html += '</div>';
     }
 
     html += "</div><br/><br/>";
-    $('.taans').append (html);
+    $('.composition').append (html);
 }
 
 export function displayBlock (sequences: Sound[][], start_beat: number, cycle: number) {

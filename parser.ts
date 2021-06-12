@@ -27,8 +27,12 @@ export function parse (s: string, note_len = DEFAULT_NOTE_LEN): Sound[] {
             skip_ch = true;
         } else if (ch === '_') {
             note = Note.HOLD_NOTE;
+        } else if (ch === ' ') {
+            // do nothing
         } else {
-            note =  Note[s.charAt(i) as keyof typeof Note];
+            if (ch === 's' || ch === 'p')
+                ch = ch.toUpperCase();
+            note =  Note[ch as keyof typeof Note];
         }
 
         if (!skip_ch)
