@@ -36,3 +36,4 @@ export function parse (s: string, note_len = DEFAULT_NOTE_LEN): Sound[] {
     }
     return result;
 }
+

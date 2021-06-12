@@ -52,3 +52,9 @@ export function display (sequence: Sound[], start_beat: number, cycle: number) {
     html += "</div><br/><br/>";
     $('.taans').append (html);
 }
+
+export function displayBlock (sequences: Sound[][], start_beat: number, cycle: number) {
+    sequences.forEach(function(sequence) {
+       display(sequence, start_beat, cycle);
+    });
+}

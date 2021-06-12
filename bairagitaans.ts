@@ -1,22 +1,12 @@
 import {generate, generateFullPatti, HOLD, HOLD2, idxOfNoteInPatti, Note, Octave, tihai, ZERO_LEN, Song} from "./music.js";
-import {parse} from "./parser.js";
 import {display, displayHeader} from "./renderer.js";
 import {ragas} from "./ragas.js";
 
+// render bairagi taans only
 export function render(): void {
     let patti = generateFullPatti(ragas['Bairagi']);
-    displayHeader("Bairagi Bhairav");
-
-    display(parse('{rS}{-nS}{rP}M__PMrrMSr-NS_', 1), 14, 16);
-    display(parse('-P-n-P-nS_rSSrSrM_PMPnPn+S_+R_{+S+r}{Sn}{Pn}{PM}{rM}{Pn}{PM}{rS}', 1), 14, 16);
-    display(parse('{rS}{-nS}{rP}M__PMrrS_', 1), 14, 16);
-    display(parse('{+S+r}{+Sn}{Pn}M{PP}nP+S__+r+S+rn+S_', 1), 10, 16);
-    display(parse('+S+r+P+M+r+SSrPMrS_rMrMPMPnPn+Sn+S+R{+S+r}{Sn}{Pn}{PM}{rM}{Pn}{PM}{rS}_', 1), 10, 16);
-
     let middle_sa_idx = idxOfNoteInPatti(patti, {octave: Octave.MIDDLE, note: Note.S, len: ZERO_LEN});
     let upper_sa_idx = idxOfNoteInPatti(patti, {octave: Octave.UPPER, note: Note.S, len: ZERO_LEN});
-
-    // bairagi taans
     displayHeader("taans");
 
     var snpmrs = generate(patti, patti[upper_sa_idx], [], -1, 6);

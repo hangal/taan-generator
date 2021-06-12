@@ -53,7 +53,7 @@ export function setLanguage(languageCode: string) {
 class Sound { octave: Octave = 0; note: Note = 0; len: number = 0; }
 
 const ZERO_LEN = 0;
-var DEFAULT_NOTE_LEN = 0.5;
+var DEFAULT_NOTE_LEN = 1;
 
 const HOLD: Sound = {octave: Octave.MIDDLE, note: Note.HOLD_NOTE, len: ZERO_LEN}; // octave and len are really don't care for hold
 const HOLD2 = [HOLD, HOLD];
