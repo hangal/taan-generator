@@ -8,8 +8,11 @@ export enum Raags {
     Multani,
     MianMalhar,
     AhirBhairav,
-    BrindavaniSarang
-}
+    BrindavaniSarang,
+    Bhimpalas,
+    Yaman,
+    Janasammohini
+};
 
 export const gats = new Map([
 [Raags.GujriTodi, `
@@ -26,7 +29,7 @@ H: antara
 
 [Raags.Bairagi, `
 H: Bairagi Bhairav
-B: 16
+T: Teen
 S: 14
 H: sthayi
 {rS}{-nS}{rP}M__PMrrMSr-NS_
@@ -39,7 +42,7 @@ H: antara
 
 [Raags.Bhairav, `
 H:Bhairav
-B:16
+T: Teen
 S:9
 H: sthayi
 GMd_P_dMP_{MP}{dP}M_Gr
@@ -55,7 +58,7 @@ SrGMP_Pd{Pd}{N+S}{dN}{+SN}dPMG
 [Raags.Bhoop, `
 H:Bhoop (teentaal)
 B:16
-S:9
+T: teen
 H:sthayi
 D+SDPGRSRG_GRGPD_
 GGGRGPD_+S_DPGRS_
@@ -77,7 +80,7 @@ D{D+S}DPG{GP}GRS{SR}{S-D}{SR}
 
 [Raags.Durga, `
 H:Durga gat number 1 (teentaal)
-B:16
+T: teen
 S:9
 H: sthayi
 SRRPPMPDD_MPMRS_
@@ -96,7 +99,7 @@ MMPD+SD+S_D+S+R+S{D+S}{DP}M_
 
 [Raags.Bageshree, `
 H:Bageshree gat number 1 (teentaal)
-B:16
+T: Teen
 S:9
 H: sthayi
 MgRS-nS-D-nS_M_gRS_
@@ -108,7 +111,7 @@ gMDnS_S_Dn+S+M+g+R+S_
 
 [Raags.Multani, `
 H:Multani (ektaal)
-B:12
+T: ektaal
 S:9
 H: sthayi
 mgmP{mP}{dP}mgrS_S
@@ -122,8 +125,9 @@ g_m_P_N_+S_N_PN+SNdPmgrS-nSPN+SNdPmgrS-nSPN+SNdPmgrS-nS
 `],
 
 [Raags.MianMalhar, `
-H:Mian ki Malhar (mattataal)
-B:9
+H:Mian ki Malhar 
+H: mattataal gat
+T: mattataal 
 S:7
 H: sthayi
 {-n-M}{-P-n}{-D-N}S{RR}P{gM}R{-nS}
@@ -131,11 +135,23 @@ H: sthayi
 H: antara
 {MP}{MP}{DN}+S_{DN+S+R}{N+S}{Dn}{MP}
 {+S+M+g+M}{+R+S}{DN}P{MPDN}+S{NP}{gM}{RS}
+
+
+H: teentaal gat
+T: teen
+S:9
+H: sthayi
+RRPP gMRS -n_-n-D-N-NS_
+SSMRP_MP{DN}+SDnP_MP
+MPnDNNS_DnMPgMRS
+H: antara
+MPnDNN+S_+R+RN+SndN+S
++R{+R+P}+M+P+g+M+R+S DnMPgMRS
 `],
 
 [Raags.AhirBhairav, `
 H:Ahir Bhairav (mattataal)
-B:9
+T: matta
 S:7
 H: sthayi
 {Gr}{Sn}{Sr}G{GMP_}M{GM}rS
@@ -143,7 +159,7 @@ H: sthayi
 H: antara
 {DM}{PD}{n+r}+S{nD}{PM}{GMPM}{PDPD}{nDn+S}
 {DN}{+S+S}{+r+G}{+G+r}{+S+S}{nD}{P+S}{nD}{PM}
-H:Ahir Bhairav
+H:Ahir Bhairav (teentaal)
 B:16
 S:6
 H: sthayi
@@ -154,8 +170,8 @@ H: antara
 `],
 
 [Raags.BrindavaniSarang, `
-H:Brindavani Sarang
-B:10
+H:Brindavani Sarang (jhaptaal)
+T: jhaptaal
 S:1
 H:sthayi
 NNSS{N+S+R+S}n{PM}PR{MP}
@@ -168,4 +184,62 @@ N_+S_+R+S_NP{NP}
 +R_+R_+M+R_N+S+S
 MPN+S+RN+SnMP
 MPN+S+R{+S+R+Sn}{PnPM}{RMRS}{-nSRM}{PN+S+R}
-`]]);
+
+H: Brindavani Sarang (teentaal)
+T: Teen
+S: 9
+H: sthayi
+{-NS}{RM}{RS}{RM}{Pn}{PM}{PN}{+S+R}S_nPMRS_
+RMRMSR-NS{nP}{PM}{PM}{MR}{MR}{RS}{SR}{-NS}
+H: antara
+{MP}{N+S}nPRMPN+S_+SN+S+R+S_
++S+RN+SPnMPRMSR-NRS_
+`],
+
+[Raags.Bhimpalas, `
+H: Bhimpalas (matta taal)
+T: mattataal
+S: 7
+{nD}{PM}{gM}P{Mg}{gR}{RS}{-NR}S
+{-nS}{gM}{Pn}+S{nD}{PM}{gMPn}{+SnDP}{MgRS}
+{gMgM}{PMPn}{Pn+Sn}+S_{Pn}{+S+g}+R+S
+{g__M}{__P_}{_n__}+S_{Pn}{+S+g}+R+S
+{+S+P+M+S}{+M+g+S+g}{+R+S+R+S}n{DP}{MP}{gMPn}{+SnDP}{MgRS}
+
+H: Bhimpalas (teentaal)
+T: Teen
+S: 9
+H: sthayi
+P+S{nD}{PM}{Pn}{DP}{Mg}{RS} SMMgMPP_
+S{SP}MP{Mg}{Mg}RS{Pn}+S{ND}{PM}{gM}P{Mg}{RS}
+H: antara
+{MP}n{DP}{MP}gMPn+S_+Sn{+S+M}{+g+M}{+g+R}+S
+{+S+M}{+S+M}{+g+R}{+Sn}{P+S}{P+S}{nD}{PM}{SM}{SM}{gR}{S-n}{-nS}{gS}{gM}{gM}
+`],
+
+[Raags.Yaman, `
+H: Yaman
+T: Teen
+S: 9
+H: sthayi
+{N+R}{+SN}{DP}{mG}{RG}{RS}{-nR}{GR}G_GRG{mG}MP
+PRmRS_S_ -n-D-nS-n-D-P-P
+-nR -nR mGmD {ND}{mD}{n+R}{+SN}{DP}{mG}{RS}{-nS}
+H: antara
+{mD}{ND}{Pm}{GR}{GR}{G_}{MD}{_N}+S_NDN+R+S_
+N+RN+G+R DND+RN mDN DN+S+ NDPm {ND}{mD}{N+R}{+G+R}{+SN}{DP}{mG}{RS}
+`],
+
+[Raags.Janasammohini, `
+H: Janasammohini
+T: Teen
+S: 9
+
+{SG}{GP}{P+S}{+Sn}{nD}{DP}{PG}{GR}G__{GR}{RS}{S-n}{-nS}_
+{GG}{GG}{PP}{PP}{DD}{DD}{nn}{nn}{+S+S}{+S+S}{+G+G}{+G+G} {+G+R}{+R+S}{+Sn}{nD}{DP}{PG}{GR}{RS}
+
+{nD}{DP}{PG}{GP}{PD}{Dn}{n+R}+S__ {+Sn}{nD}{Dn}{n+S}__
+
+{+S+G}{+G+P}{+P+G}{+G+R}{+R+S}{+Sn}{nD}{DP}{PG}{GR}{RS} {nS}{SG} {SG}{GP} {SG}{GP}{GP}{PD} {GP}{PD}{PD}{Dn} {PD}{Dn}{Dn}{n+S}{n+S} {Dn}{n+S}{n+S}{+S+G} {n+S}{+S+G}{+S+G}{+S+G}{+G+P} {+G+R}{+R+S}{+Sn}{nD}{DP}{PG}{GR}{RS} 
+`]
+]);

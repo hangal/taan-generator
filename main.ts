@@ -73,6 +73,23 @@ function parseAndDisplayText (s: string) {
             displayHeader (line.substring(2).trim());
         } else if (line.toUpperCase().indexOf("B:") == 0) {
             cycle = parseInt(line.substring(2).trim());
+        } else if (line.toUpperCase().indexOf("T:") == 0) {
+            let taal = line.substring(2).trim().toLowerCase();
+            if (taal.indexOf ('teen') == 0) {
+                cycle = 16;
+            } else if (taal.indexOf ('ek') == 0) {
+                cycle= 12;
+            } else if (taal.indexOf ('jhap') == 0) {
+                cycle = 10;
+            } else if (taal.indexOf ('matta') == 0) {
+                cycle = 9;
+            } else if (taal.indexOf ('rupak') == 0) {
+                cycle = 7;
+            } else if (taal.indexOf ('dadra') == 0) {
+                cycle = 6;
+            } else if (taal.indexOf ('ada') == 0 || taal.indexOf('deep') == 0) {
+                cycle = 14;
+            }
         } else if (line.toUpperCase().indexOf("S:") == 0) {
             start_beat = parseInt(line.substring(2).trim());
         } else if (line.toUpperCase().indexOf("L:") == 0) {
