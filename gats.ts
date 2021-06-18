@@ -11,7 +11,9 @@ export enum Raags {
     BrindavaniSarang,
     Bhimpalas,
     Yaman,
-    Janasammohini
+    Janasammohini,
+    Malkauns,
+    Darbari
 };
 
 export const gats = new Map([
@@ -241,5 +243,39 @@ S: 9
 {nD}{DP}{PG}{GP}{PD}{Dn}{n+R}+S__ {+Sn}{nD}{Dn}{n+S}__
 
 {+S+G}{+G+P}{+P+G}{+G+R}{+R+S}{+Sn}{nD}{DP}{PG}{GR}{RS} {nS}{SG} {SG}{GP} {SG}{GP}{GP}{PD} {GP}{PD}{PD}{Dn} {PD}{Dn}{Dn}{n+S}{n+S} {Dn}{n+S}{n+S}{+S+G} {n+S}{+S+G}{+S+G}{+S+G}{+G+P} {+G+R}{+R+S}{+Sn}{nD}{DP}{PG}{GR}{RS} 
+`],
+[Raags.Malkauns, `
+H: Malkauns (gat 1)
+T: teentaal
+S: 9
+
+H: sthayi 
+gMgS-nS-d-n S_M_gMgS
+-nSgMddM_ dndMgMgS
+
+H: antara
+gMdn+S_+S_ dn+Sn+S+g+S_
++S+G+M+G+SndM dndMgMgS
+
+H: Malkauns (gat 2)
+H: sthayi
+{gS}-nS{dM}gM{+Sn}{dn} +S_+SdndM_
+gMdMgMgS {dn}+S {nd}M {gM}d {Mg}S 
+H: antara
+{gM}{Mg}{Md}{dM}{dn}{nd}{n+S}{+Sn} +S_ +Sn{dM}{dn}+S_ 
+dn+S+g +M+g+Sn {dn}+S {nd}M {gM}d {Mg}S
+`],
+[Raags.Darbari, `
+H: Darbari (gat 1)
+T: ektaal
+S: 1
+
+H:sthayi
+R_RRSS -nS{RS}-d-n-P
+S_SRSR Pg_MRS
+H:sthayi
+MPd_n_+S_n+S_+S 
+P+R_+R+R+Sn+S {n+S}{+R+S}{dn}P 
+MP+S_ {nP}g_-MRS-nS
 `]
 ]);

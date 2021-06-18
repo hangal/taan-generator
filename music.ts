@@ -1,6 +1,6 @@
 
 enum Note {S, r, R, g, G, M, m, P, d, D, n, N, HOLD_NOTE}
-enum Octave {LOWER, MIDDLE, UPPER} // important assumption for iterating over octave elements - the values have to be numbers
+enum Octave {LOWER_LOWER, LOWER, MIDDLE, UPPER, UPPER_UPPER} // important assumption for iterating over octave elements - the values have to be numbers
 
 const languageToBasicNotes = new Map([
     ["sen", ['S', 'R', 'G', 'M', 'P', 'D', 'N']],
