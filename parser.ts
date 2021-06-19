@@ -41,8 +41,10 @@ export function parse (s: string, note_len = DEFAULT_NOTE_LEN): Sound[] {
         } else if (ch === '/') {
             if (i+1 < s.length) {
                 let div = parseInt(s.charAt(i+1));
-                current_note_len /= div;
+                current_note_len = 1/div;
+                i++;
             }
+            skip_ch = true;
         } else if (ch === '_') {
             note = Note.HOLD_NOTE;
         } else if (ch === ' ' || ch === ',') {

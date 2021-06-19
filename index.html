@@ -10,13 +10,17 @@
          body { font-family: "Open Sans", sans-serif; margin:auto;}
         .composition { color: inherit; }
         .taan { border-bottom: solid 1px lightyellow; padding-top: 10px; display: inline-block;}
-        .note { display: inline-block; padding: 5px; position:relative; top:5px; text-underline-offset: 8px;}  .note { display: inline-block; padding: 5px; position:relative; top:5px; text-underline-offset: 8px;}
+         .taan.highlight { background-color: darkgreen; }
+
+         .note { display: inline-block; padding: 5px; position:relative; top:5px; text-underline-offset: 8px;}
+         .small-note { display: inline-block; padding-left: 2px; padding-right: 2px; padding-top:7px; font-size: 90%; }
          .teevra::after { content: '|'; position: absolute; top: -6px; left: 15px; font-size: 9px;}
          .komal { text-decoration: underline; }
          .lower-octave::after { content: 'o'; position: absolute; top: 18px; left: 8px; font-size: 10px;}
         .upper-octave::after {  content: 'o'; position: absolute; top: -6px; left: 8px; font-size: 12px; }
-        .beat { display: inline-block; border-right: solid 2px #444; height: 60px; width: 70px; padding-top: 5px; text-align: center;}
-        .beat-number { padding-left: 5px; font-size: 12px; color: lightskyblue;}
+         .small-note.upper-octave::after {  content: 'o'; position: absolute; top: -6px; left: 4px; font-size: 12px; }
+         .beat { display: inline-block; border-right: solid 2px #444; height: 60px; width: 70px; padding-top: 5px; text-align: center;}
+        .beat-number { font-size: 12px; color: lightskyblue;}
         .emoji { color: transparent; text-shadow: 0 0 0 lightskyblue; }
         select { background: black; color: white; padding: 10px; border-top: none; border-left: none; border-right: none; }
         button.composer-button { margin-left: 10px; background:inherit; color:white; padding: 10px; border: solid 1px #999; }
@@ -57,6 +61,7 @@
         <option value="Multani">Multani</option>
         <option value="Bhimpalas">Bhimpalas</option>
 
+        <option value="Yaman">Yaman</option>
         <option value="Bhoop">Bhoop</option>
         <option value="Durga">Durga</option>
         <option value="Malkauns">Malkauns</option>
@@ -67,7 +72,7 @@
 
     </select>
 
-    <button class="composer-button">Composer</button>
+    <button class="composer-button">Compose</button>
     <br/><br/>
     <div class="composer" style="display:none">
         <div class="composer-help">

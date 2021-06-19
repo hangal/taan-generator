@@ -17,28 +17,16 @@
 };
 
 export const gats = new Map([
-[Raags.GujriTodi, `
-H:Gujri Todi
-B:16
-S:9
-H: sthayi
-ddmd_mgm+SNd_mgrS
-grdm+g+r{+S+r}{+g+r}{+SN}{dN}{+S+r}{+g+r}{SN}{dm}{gr}S
-H: antara
-{N+S}{dN}{md}{gm}{rg}{Sr}{gm}{dN}+S_Ndmd+S_
-{md}{+g+r}{SN}{md}{+r+S}{Nd}{md}+S_N_d_m_g
-`],
-
 [Raags.GujriTodi,`
 H:Gujri Todi
 B:16
 S:9
 H: sthayi
 Sdmdmgm_  +SndmgrS_
-gr dm gr /2srgr sndn srgr sndmgrs_
+gr dm gr /2+S+r+g+r +Sndn +S+r+g+r +SndmgrS_
 H: antara
-/2 NS dN md gm rg Sr gm dN /1 +S_ Ndmd+S_
-/2 md+g+r+Sn, md+r+sNd, md /1 +S_N_d_m_g
+/2 N+S dN md gm rg Sr gm dN /1 +S_ Ndmd+S_
+/2 md+g+r+Sn, md+r+SNd, md /1 +S_N_d_m_g
 `],
 
 [Raags.Bairagi, `
@@ -46,12 +34,13 @@ H: Bairagi Bhairav
 T: Teen
 S: 14
 H: sthayi
-{rS}{-nS}{rP}M__PMrrMSr-NS_
--P-n-P-nS_rSSrSrM_PMPnPn+S_+R_{+S+r}{Sn}{Pn}{PM}{rM}{Pn}{PM}{rS}
-{rS}{-nS}{rP}M__PMrrS_
+{rS}{-nS}{rP}M__, PMrrMSr-NS_
+-P-n-P-nS_rS, SrSrM_PM, PnPn+S_+R /2 +S+rSnPnPMrMPnPMrS /1 _
+{rS}{-nS}{rP}M__, PMrrS_
 H: antara
+S: 10
 {+S+r}{+Sn}{Pn}M{PP}nP+S__+r+S+rn+S_
-+S+r+P+M+r+SSrPMrS_rMrMPMPnPn+Sn+S+R{+S+r}{Sn}{Pn}{PM}{rM}{Pn}{PM}{rS}_
++S+r+P+M+r+S, SrPMrS_ rMrMPM, PnPn+Sn, +S+r /1 +S+rSnPnPMrMPnPMrS /1 _
 `],
 
 [Raags.Bhairav, `
@@ -59,12 +48,12 @@ H:Bhairav
 T: Teen
 S:9
 H: sthayi
-GMd_P_dMP_{MP}{dP}M_Gr
-GGMrGMPPMGMGr_S_
-SrGMP_Pd{Pd}{N+S}{dN}{+SN}dPMG
+GMd_P_dM P_{MP}{dP}M_Gr
+GGMrGMP PMGMGr_S_
+SrGMP_Pd {Pd}{N+S}{dN}{+SN}dPMG
 H: antara
 M_MMPPddPd+S_+SN+r+S
-d_dN_N+S+SN_+S+r{+S+r}{+SN}dP}
+d_dN_N+S+SN_+S+r /2 +S+r+SN /1 dP
 GGMrGMPPMGMGr_S_
 SrGMP_Pd{Pd}{N+S}{dN}{+SN}dPMG
 `],
@@ -85,11 +74,11 @@ S:1
 H: sthayi
 GRG_R_S-D-P-DSR
 GRG_{GP}{DP}GRSDS_
--D{-DS}-DSR{GR}SR{GP}{DP}{DP}{DP}
+-D{-DS}-DSR{GR}SR /2 GP DP DP DP
 H: antara
 GGGPDPD+SD+S_+S
 DDD+S+R+R{+S+R}+G+R{+S+R}{+SD}P
-D{D+S}DPG{GP}GRS{SR}{S-D}{SR}
+D{D+S}DPG{GP}GRS /2 SRS-DSR
 `],
 
 [Raags.Durga, `
@@ -102,6 +91,7 @@ SRSRS-DS_D+SDPMRS_
 H: antara
 MMPD+SD+S_D+S+R+SDPM_
 +M_+R+SDPMPDSDPMRS_
+
 H:Durga gat number 2 (teentaal)
 H: sthayi
 SDPD_M_PD_MPMRS_
@@ -116,11 +106,11 @@ H:Bageshree gat number 1 (teentaal)
 T: Teen
 S:9
 H: sthayi
-MgRS-nS-D-nS_M_gRS_
--nSgMDnD_MPDMgRS_
+MgRS-nS-D-n S_M_gRS_
+-nSgMDnD_ MPDMgRS_
 H: antara
-gMDnS_S_Dn+S+M+g+R+S_
-+M+g+R+SDnDMMPDMgRS_
+gMDnS_S_ Dn+S+M+g+R+S_
++M+g+R+SDnDM MPDMgRS_
 `],
 
 [Raags.Multani, `
@@ -129,13 +119,12 @@ T: ektaal
 S:9
 H: sthayi
 mgmP{mP}{dP}mgrS_S
--N_Sg_mP_{Sg}{mP}{mg}{rS}
+-N_Sg_mP_ /2 SgmP mgrS
 H: antara
 PmPgmmPNN+S_+S
 PN+S+g+r+SN+SNdPm
-gmPN+SN{PN}{+SN}{dP}{mg}{rS}{-nS}
-L:0.5
-g_m_P_N_+S_N_PN+SNdPmgrS-nSPN+SNdPmgrS-nSPN+SNdPmgrS-nS
+gmPN+SN /2 PN+SNdPmgrS-nS
+gmPN+SN /2 PN+SNdPmgrS-nS PN+SNdPmgrS-nS PN+SNdPmgrS-nS
 `],
 
 [Raags.MianMalhar, `
@@ -156,10 +145,10 @@ T: teen
 S:9
 H: sthayi
 RRPP gMRS -n_-n-D-N-NS_
-SSMRP_MP{DN}+SDnP_MP
-MPnDNNS_DnMPgMRS
+SSMRP_MP {DN}+SDnP_MP
+MPnDNNS_ DnMPgMRS
 H: antara
-MPnDNN+S_+R+RN+SndN+S
+MPnDNN+S_ +R+RN+SndN+S
 +R{+R+P}+M+P+g+M+R+S DnMPgMRS
 `],
 
@@ -177,10 +166,10 @@ H:Ahir Bhairav (teentaal)
 B:16
 S:6
 H: sthayi
-{rS}{-nS}{Gr}{Sr}{MG}{rG}{PM}{Gr}{S-n}{D-n}{Sr}G_GrS
-{rS}{-nS}{Gr}{Sr}{MG}{rG}{PM}{Gr}{S-n}{D-n}{Sr}G_{D-n}{Sr}G{Sr}{GM}P{GM}{PD}n{PD}{n+S}+r{+r+S}n{nD}P{PM}G{Gr}S{Sn}D{DN}{Sr}G{DN}{Sr}G{DN}{Sr}G_GrS
+/2 rS-nS GrSr MGrG PMGr S-nD-nSr /1 G_,GrS
+/2 rS-nSGrSrMGrGPMGrS-nD-nSr /1 G_ /2 D-nSrG_ SrGMP_ GMPDn_ PDn+S+r_ /1 {+r+S}n {nD}P {PM}G {Gr}S {Sn}D {DN}{Sr}G,{DN}{Sr}G,{DN}{Sr} G_,GrS
 H: antara
-{rS}{-nS}{Gr}{Sr}{MG}{rG}{PM}{Gr}{S-n}{D-n}{Sr}GMPDn+R+S{nS}{Dn}{PD}{MP}{GM}{Sr}{GM}{PD}{n+R}+S_nDn+rS{Dn}{+Sr}+G{GM}{PD}n{Sr}{GM}P{-D-n}{Sr}{Gr}{Sr}G_{-D-n}{Sr}{Gr}{Sr}G_{-D-n}{Sr}{Gr}{Sr}G_GrS
+/2 rS-nSGrSrMGrGPMGrS-nD-nSr /1 GMPDn+R+S /2 nSDnPDMPGMSrGMPDn+R /1 +S_,nDn+rS {Dn}{+Sr}+G, {GM}{PD}n, {Sr}{GM}P, {-D-n}{Sr}{Gr}{Sr}G_, {-D-n}{Sr}{Gr}{Sr}G_, {-D-n}{Sr}{Gr}{Sr}G_,GrS
 `],
 
 [Raags.BrindavaniSarang, `
@@ -203,8 +192,8 @@ H: Brindavani Sarang (teentaal)
 T: Teen
 S: 9
 H: sthayi
-{-NS}{RM}{RS}{RM}{Pn}{PM}{PN}{+S+R}S_nPMRS_
-RMRMSR-NS{nP}{PM}{PM}{MR}{MR}{RS}{SR}{-NS}
+/2 -NSRMRSRMPnPMPN+S+R /1 S_nPMRS_
+RMRMSR-NS /2 nPPM PMMR MRRS SR-NS
 H: antara
 {MP}{N+S}nPRMPN+S_+SN+S+R+S_
 +S+RN+SPnMPRMSR-NRS_
@@ -235,13 +224,15 @@ H: antara
 H: Yaman
 T: Teen
 S: 9
+
 H: sthayi
-{N+R}{+SN}{DP}{mG}{RG}{RS}{-nR}{GR}G_GRG{mG}MP
+/2 N+R+SNDPmGRGRS -nRGR /1 G_GR G{mG}MP
 PRmRS_S_ -n-D-nS-n-D-P-P
--nR -nR mGmD {ND}{mD}{n+R}{+SN}{DP}{mG}{RS}{-nS}
+-nR -nR mGmD /2 NDmDn+R+SNDPmGRS-nS
+
 H: antara
-{mD}{ND}{Pm}{GR}{GR}{G_}{MD}{_N}+S_NDN+R+S_
-N+RN+G+R DND+RN mDN DN+S+ NDPm {ND}{mD}{N+R}{+G+R}{+SN}{DP}{mG}{RS}
+/2 mDNDPmGR GR /1 G{MD}{_N} +S_,NDN+R+S_
+N+RN+G+R DND+RN mDN DN+S+ NDPmDN+R /2 NDmDN+R+G+R+SNDPmGRS
 `],
 
 [Raags.Janasammohini, `
@@ -249,13 +240,15 @@ H: Janasammohini
 T: Teen
 S: 9
 
-{SG}{GP}{P+S}{+Sn}{nD}{DP}{PG}{GR}G__{GR}{RS}{S-n}{-nS}_
-{GG}{GG}{PP}{PP}{DD}{DD}{nn}{nn}{+S+S}{+S+S}{+G+G}{+G+G} {+G+R}{+R+S}{+Sn}{nD}{DP}{PG}{GR}{RS}
+H: sthayi
+2/ SGGPP+S+SnnDDPPGGRG__GRRSS-n-nS_
+2/ GGGGPPPPDDDDnnnn+S+S+S+S+G+G+G+G +G+R+R+S+SnnDDPPGGRRS
 
-{nD}{DP}{PG}{GP}{PD}{Dn}{n+R}+S__ {+Sn}{nD}{Dn}{n+S}__
-
-{+S+G}{+G+P}{+P+G}{+G+R}{+R+S}{+Sn}{nD}{DP}{PG}{GR}{RS} {nS}{SG} {SG}{GP} {SG}{GP}{GP}{PD} {GP}{PD}{PD}{Dn} {PD}{Dn}{Dn}{n+S}{n+S} {Dn}{n+S}{n+S}{+S+G} {n+S}{+S+G}{+S+G}{+S+G}{+G+P} {+G+R}{+R+S}{+Sn}{nD}{DP}{PG}{GR}{RS} 
+H: antara
+2/ nDDPPGGPPDDnn+R+S__ +SnnDDnn+S__
+2/ +S+G+G+P+P+G+G+R+R+S+SnnDDPPGGRRS nSSG SGGP SGGPGPPD GPPDPDDn PDDnDnn+Sn+S Dnn+Sn+S+S+G n+S+S+G+S+G+S+G+G+P +G+R+R+S+SnnDDPPGGRRS 
 `],
+
 [Raags.Malkauns, `
 H: Malkauns (gat 1)
 T: teentaal
@@ -271,12 +264,13 @@ gMdn+S_+S_ dn+Sn+S+g+S_
 
 H: Malkauns (gat 2)
 H: sthayi
-{gS}-nS{dM}gM{+Sn}{dn} +S_+SdndM_
-gMdMgMgS {dn}+S {nd}M {gM}d {Mg}S 
+{gS}-nS, {dM}gM, {+Sn}{dn} +S_, +SdndM_
+gMdMgMgS {dn}+S {nd}M, {gM}d {Mg}S 
 H: antara
-{gM}{Mg}{Md}{dM}{dn}{nd}{n+S}{+Sn} +S_ +Sn{dM}{dn}+S_ 
-dn+S+g +M+g+Sn {dn}+S {nd}M {gM}d {Mg}S
+/2 gMMgMddMdnndn+S+Sn /1 +S_, +Sn{dM}{dn}+S_ 
+dn+S+g +M+g+Sn, {dn}+S {nd}M, {gM}d {Mg}S
 `],
+
 [Raags.Darbari, `
 H: Darbari (gat 1)
 T: ektaal

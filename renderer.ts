@@ -6,8 +6,9 @@ export function displayHeader (s: string) {
     $('.composition').append ('<div class="header">' + s + '</div>');
 }
 
-export function display (sequence: Sound[], start_beat: number, cycle: number) {
-    var html = '<div class="taan">';
+// line_num is the line number in the input
+export function display (sequence: Sound[], start_beat: number, cycle: number, line_num = 0) {
+    var html = '<div class="taan" data-linenum="' + line_num+ '">';
     var this_beat = start_beat;
 
     function close_beat() {
@@ -39,22 +40,28 @@ export function display (sequence: Sound[], start_beat: number, cycle: number) {
 
         cumulative_len += note.len;
 
+        const $note = $('<div></div>');
+        $note.addClass('note');
         if (note.octave === Octave.LOWER)
-            html += '<div class="note lower-octave">';
+            $note.addClass('lower-octave');
         else if (note.octave === Octave.UPPER)
-            html += '<div class="note upper-octave">';
-        else
-            html += '<div class="note">';
-        html += displayStr[note.note] ? displayStr[note.note] : "?";
-        html += '</div>';
+            $note.addClass('upper-octave');
+
+        if (note.len < 0.5) {
+            $note.addClass("small-note");
+        }
+
+        $note.html(displayStr[note.note] ? displayStr[note.note] : "?");
+        console.log ('adding html ' + $note[0].outerHTML);
+        html += $note[0].outerHTML;
     }
 
     html += "</div><br/><br/>";
     $('.composition').append (html);
 }
-
-export function displayBlock (sequences: Sound[][], start_beat: number, cycle: number) {
-    sequences.forEach(function(sequence) {
-       display(sequence, start_beat, cycle);
-    });
-}
+//
+// export function displayBlock (sequences: Sound[][], start_beat: number, cycle: number) {
+//     sequences.forEach(function(sequence) {
+//        display(sequence, start_beat, cycle);
+//     });
+// }

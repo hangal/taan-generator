@@ -40,11 +40,21 @@ $(function() {
         renderSong();
     });
 
-    $('.composer-text').keyup(function() {
-        renderSong();
-    });
 
-    $('.composer-button').click(function(e) {
+    $('.composer-text').on('keyup click', function (e) {
+            renderSong();
+            const tarea = e.target as HTMLTextAreaElement;
+            const startLine = tarea.value.substr(0, tarea.selectionStart).split("\n").length;
+            const endLine = tarea.value.substr(0, tarea.selectionEnd).split("\n").length;
+            console.log ('highlighting ' + startLine + '..' + endLine);
+            $('div.taan').removeClass('highlight');
+            for (let line = startLine; line <= endLine; line++) {
+                $('div.taan[data-linenum="' + line + '"]').addClass('highlight'); // .get(0).scrollIntoView();
+            }
+            return false;
+        });
+
+    $('.composer-button').on ('click', function(e) {
         var $textbox = $('.composer');
         $textbox.toggle();
         
@@ -65,8 +75,10 @@ function parseAndDisplayText (s: string) {
     var start_beat = 9;
     var note_len = DEFAULT_NOTE_LEN;
 
+    let lineNum = 0;
     lines.forEach(function(line) {
         line = line.trim();
+        lineNum++;
         if (!line)
             return;
         if (line.toUpperCase().indexOf("H:") == 0) {
@@ -95,7 +107,7 @@ function parseAndDisplayText (s: string) {
         } else if (line.toUpperCase().indexOf("L:") == 0) {
             note_len = parseFloat(line.substring(2).trim());
         } else {
-            display (parse(line, note_len), start_beat, cycle);
+            display (parse(line, note_len), start_beat, cycle, lineNum);
         }
     });
 }
