@@ -1,11 +1,11 @@
 import {DEFAULT_NOTE_LEN, Note, Octave, Sound} from "./music.js";
 
-/* parse a text string into a sound sequence (like Lilypond or ABC) */
+/* parse a single line text string into a sound sequence (like Lilypond or ABC) */
 export function parse (s: string, note_len = DEFAULT_NOTE_LEN): Sound[] {
     let result: Sound[] = [];
     var current_note_len = note_len;
 
-    let defaulOctave = Octave.MIDDLE;
+    let defaultOctave = Octave.MIDDLE;
     // if the first line is a + or -, we default to upper or lower octave
     {
         // if (s.charAt(0) == '+')
@@ -20,7 +20,7 @@ export function parse (s: string, note_len = DEFAULT_NOTE_LEN): Sound[] {
         var note: number;
 
         if (ch === '-' || ch === '+') {
-            octave = (ch === '-') ? defaulOctave-1 : defaulOctave+1;
+            octave = (ch === '-') ? defaultOctave-1 : defaultOctave+1;
             i++;
             ch = s.charAt(i);
             if (ch === '-' || ch === '+') {
@@ -38,9 +38,14 @@ export function parse (s: string, note_len = DEFAULT_NOTE_LEN): Sound[] {
         } else if (ch === '}') {
             current_note_len = note_len; // restore the default
             skip_ch = true;
+        } else if (ch === '/') {
+            if (i+1 < s.length) {
+                let div = parseInt(s.charAt(i+1));
+                current_note_len /= div;
+            }
         } else if (ch === '_') {
             note = Note.HOLD_NOTE;
-        } else if (ch === ' ') {
+        } else if (ch === ' ' || ch === ',') {
             // do nothing
             skip_ch = true;
         } else {

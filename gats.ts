@@ -1,4 +1,4 @@
-export enum Raags {
+﻿export enum Raags {
     GujriTodi,
     Bairagi,
     Bhairav,
@@ -27,6 +27,18 @@ grdm+g+r{+S+r}{+g+r}{+SN}{dN}{+S+r}{+g+r}{SN}{dm}{gr}S
 H: antara
 {N+S}{dN}{md}{gm}{rg}{Sr}{gm}{dN}+S_Ndmd+S_
 {md}{+g+r}{SN}{md}{+r+S}{Nd}{md}+S_N_d_m_g
+`],
+
+[Raags.GujriTodi,`
+H:Gujri Todi
+B:16
+S:9
+H: sthayi
+Sdmdmgm_  +SndmgrS_
+gr dm gr /2srgr sndn srgr sndmgrs_
+H: antara
+/2 NS dN md gm rg Sr gm dN /1 +S_ Ndmd+S_
+/2 md+g+r+Sn, md+r+sNd, md /1 +S_N_d_m_g
 `],
 
 [Raags.Bairagi, `
