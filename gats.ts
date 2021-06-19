@@ -13,7 +13,8 @@
     Yaman,
     Janasammohini,
     Malkauns,
-    Darbari
+    Darbari,
+    Vachaspati
 };
 
 export const gats = new Map([
@@ -283,5 +284,12 @@ H:sthayi
 MPd_n_+S_n+S_+S 
 P+R_+R+R+Sn+S {n+S}{+R+S}{dn}P 
 MP+S_ {nP}g_-MRS-nS
-`]
+`],
+
+[Raags.Vachaspati, `
+H: Vachaspati
+T: teen
+S: 12
+PmP+S_n__ DPmGm, /2 GGRS-nS
+S-n SP_m_ P+S_n_ +S+P_+m_ /2 +G+m+G+R+Sn+S___ n+SnDPmP___ gmGRS-nS___`]
 ]);
