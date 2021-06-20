@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "outDir": "./gathab/public/dist/",
     "sourceMap": true,
     "noImplicitAny": true,
     "target": "es5",
     "module": "es6",
+    "moduleResolution": "Node",
     // see http://json.schemastore.org/tsconfig
     "lib": [
       "dom",
